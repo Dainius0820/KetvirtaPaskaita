@@ -125,7 +125,6 @@ public class Main {
         System.out.println("Skaičius " + rndNumber + " dalijasi be liekanos" +
                     " iš " + factorsCount(rndNumber) + " skaičių(-iaus)");
 
-
         System.out.println("\n-------------------------- TASK 15 --------------------------\n");
 
         // 15. Sugeneruokite masyvą iš 100 elementų, kurio reikšmės atsitiktiniai
@@ -136,7 +135,19 @@ public class Main {
         for (int i = 0; i < rndNumArray.length; i++) {
             System.out.print(rndNumArray[i] + " ");
         }
-
+        System.out.println();
+        for (int i = 0; i < rndNumArray.length - 1; i++) {
+            for (int j = i + 1; j < rndNumArray.length; j++) {
+               if (factorsCount(rndNumArray[i]) < factorsCount(rndNumArray[j])) {
+                   int temp = rndNumArray[i];
+                   rndNumArray[i] = rndNumArray[j];
+                   rndNumArray[j] = temp;
+               }
+            }
+        }
+        for (int i = 0; i < rndNumArray.length; i++) {
+            System.out.print(rndNumArray[i] + " ");
+        }
     }
 
     public static void printSum (int x, int y) {
@@ -256,15 +267,15 @@ public class Main {
     // 14. -----------------------------------------------------------------------------------------------
 
     public static int factorsCount(int rndNum) {
-        /*int factorsCount = 0;
-        for (int i = 2; i <= rndNum - 1; i++) {
+        int factorsCount = 0;
+        for (int i = 2; i < rndNum - 1; i++) {
             if (rndNum % i == 0) {
-                System.out.println("Dalijasi be liekanos iš: " + i);
                 factorsCount++;
             }
         }
         return factorsCount;
-         */
+
+        /*
         int factor = 1;
         int factorsCount = 0;
         boolean isPrimeNum = false;
@@ -282,6 +293,7 @@ public class Main {
             factorsCount -= 2;
         }
         return factorsCount;
+         */
     }
 
     // 15. -----------------------------------------------------------------------------------------------
