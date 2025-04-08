@@ -51,7 +51,7 @@ public class Main {
         // gražintų. Funkcija priima tris int tipo kintamuosius, min, max ir length
         // reikšmėms nustatyti.
 
-        int[] numArray = rndNumberArray(5, 10, 5);
+        int[] numArray = rndNumArray(5, 10, 5);
         System.out.println(Arrays.toString(numArray));
 
         System.out.println("\n-------------------------- TASK 7 --------------------------\n");
@@ -59,11 +59,83 @@ public class Main {
         // 7. Sukurkite Funkciją kuri panaudotų 6toje užduotyje sugeneruotą masyvą
         // (priimtų kaip kintamąjį), susumuotų ir gražintų reikšmę.
 
-        System.out.println(sumRndNumberArray(numArray));
+        System.out.println(sumRndNumArray(numArray));
+
+        System.out.println("\n-------------------------- TASK 8 --------------------------\n");
 
         // 8. Sukurkite Funkciją kuri priimtų 6toje užduotyje sugeneruotą masyvą ir
         // gražintų jos skaičių vidurkį (double).
 
+        System.out.println(averageRnDNumArray(numArray));
+
+        System.out.println("\n-------------------------- TASK 9 --------------------------\n");
+
+        // 9. Sukurkite Funkciją kuri priimtų du int skaičius ir atspausdintų
+        // stačiakampį užpildytą žvaigždutėmis. Pirmas int - išoriniam ciklui,
+        // antras vidiniam.
+
+        int num3 = 5;
+        int num4 = 9;
+
+        rectangle(num3, num4);
+
+        System.out.println("\n-------------------------- TASK 10 --------------------------\n");
+
+        // 10. Sukurkite Funkciją kuri priimtų sakinį kaip kintamąjį ir atspausdintų
+        // kiek jame yra raidžių(simbolių) ir tarpų. Sakinys - “Šiandien labai graži
+        // diena” (kodas turi veikti padavus bet kokį sakinį).
+
+        String sentence = "Šiandien labai graži diena";
+        spaceSymbolCount(sentence);
+
+        System.out.println("\n-------------------------- TASK 11 --------------------------\n");
+
+        // 11. Sukurkite Funkciją kuri priimtų sakinį, jį užkoduotų ir grąžintų.
+        // Kodavimas - sakinį apsukame iš kitos pusės. Pvz “Naglis” turi gautis
+        // “silgaN”.
+
+        System.out.println(reverseSentence(sentence));
+
+        System.out.println("\n-------------------------- TASK 12 --------------------------\n");
+
+        // 12. Parašykite funkciją, kurios argumentas būtų tekstas, kuris būtų
+        // atspausdinamas konsolėje pridedant “---” pradžioje ir gale. PVZ
+        // (---labas---)
+
+        addDashes(sentence);
+
+        System.out.println("\n-------------------------- TASK 13 --------------------------\n");
+
+        // 13. Sugeneruokite atsitiktinį stringą iš raidžių ir skaičių (10 simbolių).
+        // Atspausdinkite simbolius stulpeliu. Jei tai skaičius apgaubkite “ [ 7 ]”. Jei
+        // skaičiai eina keli iš eilės, apgaubkite juos kartu. [75].
+
+        String text = generateRndStr(10);
+        System.out.println(text);
+        printRndStr(text);
+
+        System.out.println("\n-------------------------- TASK 14 --------------------------\n");
+
+        // 14. Parašykite funkciją, kuri skaičiuotų, ir gražintų iš kiek sveikų skaičių jos
+        // argumentas dalijasi be liekanos (išskyrus vienetą ir patį save).
+
+        int rndNumber = (int) (Math.random() * 100);
+        System.out.println(rndNumber);
+
+        System.out.println("Skaičius " + rndNumber + " dalijasi be liekanos" +
+                    " iš " + factorsCount(rndNumber) + " skaičių(-iaus)");
+
+
+        System.out.println("\n-------------------------- TASK 15 --------------------------\n");
+
+        // 15. Sugeneruokite masyvą iš 100 elementų, kurio reikšmės atsitiktiniai
+        // skaičiai nuo 33 iki 77. Išrūšiuokite masyvą pagal daliklių be liekanos kiekį
+        // mažėjimo tvarka, panaudodami trečio uždavinio funkciją.
+
+        int[] rndNumArray = rndNumArray(33, 77, 100);
+        for (int i = 0; i < rndNumArray.length; i++) {
+            System.out.print(rndNumArray[i] + " ");
+        }
 
     }
 
@@ -96,7 +168,7 @@ public class Main {
         return rndNumber;
     }
 
-    public static int[] rndNumberArray(int min, int max, int length) {
+    public static int[] rndNumArray(int min, int max, int length) {
         int[] rndNumbers = new int[length];
         for (int i = 0; i < rndNumbers.length; i++) {
             rndNumbers[i] = min + (int) Math.round(Math.random() * (max - min));
@@ -104,13 +176,115 @@ public class Main {
         return rndNumbers;
     }
 
-    public static int sumRndNumberArray (int[] numArray) {
+    public static int sumRndNumArray(int[] numArray) {
         int sum = 0;
         for (int i : numArray)
             sum += i;
         return sum;
     }
 
+    public static double averageRnDNumArray(int[] numArray) {
+        int sum = 0;
+        for (int i : numArray)
+            sum += i;
+        return (double)sum / numArray.length;
+    }
+
+    public static void rectangle (int num1, int num2) {
+        char star = '*';
+        for (int x = 0; x < num1; x++) {
+            for (int y = 0; y < num2; y++) {
+                System.out.print(star);
+            }
+            System.out.println();
+        }
+    }
+
+    public static void spaceSymbolCount (String sentence) {
+        int numOfSpaces = sentence.length() - sentence.replace(" ", "").length();
+        int numOfSymbols = sentence.length() - numOfSpaces;
+        System.out.println("Simbolių skaičius: " + numOfSymbols + "\nTarpų skaičius: " + numOfSpaces);
+    }
+
+    public static String reverseSentence (String sentence) {
+        String reversedStr = "";
+        for (int i = 0; i < sentence.length(); i++) {
+            reversedStr = sentence.charAt(i) + reversedStr;
+        }
+        return reversedStr;
+    }
+
+    // 12. -----------------------------------------------------------------------------------------------
+
+    public static void addDashes (String sentence) {
+        System.out.println("---" + sentence + "---");
+    }
+
+    // 13. -----------------------------------------------------------------------------------------------
+
+    public static String generateRndStr(int length) {
+        String symbols = "ABCDEFGHIJKLMNOPQRSTUVWXYZ12345678901234567890";
+        String text = "";
+        for (int i = 0; i < length; i++) {
+            text += symbols.charAt((int) (Math.random()*symbols.length()));
+        }
+        return text;
+    }
+
+    public static void printRndStr (String rndStr) {
+        String[] textArray = rndStr.split("");
+        boolean isNumberGrouped = false;
+
+        for (int i = 0; i < rndStr.length(); i++) {
+            if (textArray[i].matches("[0-9]")) {
+                if (!isNumberGrouped) {
+                    System.out.print("[");
+                    isNumberGrouped = true;
+                }
+                System.out.print(textArray[i]);
+                if (i == textArray.length - 1 || !textArray[i + 1].matches("[0-9]")) {
+                    System.out.println("]");
+                    isNumberGrouped = false;
+                }
+            }
+            else {
+                System.out.println(textArray[i]);
+            }
+        }
+    }
+
+    // 14. -----------------------------------------------------------------------------------------------
+
+    public static int factorsCount(int rndNum) {
+        /*int factorsCount = 0;
+        for (int i = 2; i <= rndNum - 1; i++) {
+            if (rndNum % i == 0) {
+                System.out.println("Dalijasi be liekanos iš: " + i);
+                factorsCount++;
+            }
+        }
+        return factorsCount;
+         */
+        int factor = 1;
+        int factorsCount = 0;
+        boolean isPrimeNum = false;
+
+        while (factor <= rndNum) {
+            if (rndNum % factor == 0) {
+                factorsCount++;
+            }
+            factor++;
+        }
+        if (factorsCount == 2) {
+            factorsCount = 0;
+        }
+        if (factorsCount > 2) {
+            factorsCount -= 2;
+        }
+        return factorsCount;
+    }
+
+    // 15. -----------------------------------------------------------------------------------------------
 
 
 
@@ -167,7 +341,5 @@ public class Main {
 
 
 
-
-
-        // END OF CLASS... DON'T DELETE!}
+    // END OF CLASS... DON'T DELETE!}
 }
