@@ -136,18 +136,10 @@ public class Main {
             System.out.print(rndNumArray[i] + " ");
         }
         System.out.println();
-        for (int i = 0; i < rndNumArray.length - 1; i++) {
-            for (int j = i + 1; j < rndNumArray.length; j++) {
-               if (factorsCount(rndNumArray[i]) < factorsCount(rndNumArray[j])) {
-                   int temp = rndNumArray[i];
-                   rndNumArray[i] = rndNumArray[j];
-                   rndNumArray[j] = temp;
-               }
-            }
-        }
-        for (int i = 0; i < rndNumArray.length; i++) {
-            System.out.print(rndNumArray[i] + " ");
-        }
+        sortNumArrayFactors(rndNumArray);
+
+        System.out.println("\n-------------------------- TASK 16 --------------------------\n");
+
     }
 
     public static void printSum (int x, int y) {
@@ -298,7 +290,20 @@ public class Main {
 
     // 15. -----------------------------------------------------------------------------------------------
 
-
+    public static void sortNumArrayFactors (int[] rndNumArray) {
+        for (int i = 0; i < rndNumArray.length - 1; i++) {
+            for (int j = i + 1; j < rndNumArray.length; j++) {
+                if (factorsCount(rndNumArray[i]) < factorsCount(rndNumArray[j])) {
+                    int temp = rndNumArray[i];
+                    rndNumArray[i] = rndNumArray[j];
+                    rndNumArray[j] = temp;
+                }
+            }
+        }
+        for (int i = 0; i < rndNumArray.length; i++) {
+            System.out.print(rndNumArray[i] + " ");
+        }
+    }
 
 
 
