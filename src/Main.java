@@ -138,7 +138,38 @@ public class Main {
         System.out.println();
         sortNumArrayFactors(rndNumArray);
 
-        System.out.println("\n-------------------------- TASK 16 --------------------------\n");
+        System.out.println("\n\n-------------------------- TASK 16 --------------------------\n");
+
+        // 16. Sugeneruokite masyvą iš 100 elementų, kurio reikšmės atsitiktiniai
+        // skaičiai nuo 333 iki 777. Naudodami 3 uždavinio funkciją iš masyvo
+        // suskaičiuokite kiek yra pirminių skaičių.
+
+        int[] rndNumArray1 = rndNumArray(333, 777, 100);
+        for (int i = 0; i < rndNumArray1.length; i++) {
+            System.out.print(rndNumArray1[i] + " ");
+        }
+        System.out.println();
+        // int[] rndNumArray2 = {2, 3, 5, 7, 4, 12};
+        System.out.println(primeNumbersCount(rndNumArray1));
+        // System.out.println(primeNumbersCount(rndNumArray2));
+
+        System.out.println("\n\n-------------------------- TASK 17 --------------------------\n");
+
+        // 17. Sugeneruokite masyvą iš trijų elementų, kurie yra atsitiktiniai skaičiai
+        // nuo 1 iki 33. Jeigu tarp trijų paskutinių elementų yra nors vienas ne
+        // pirminis skaičius, prie masyvo pridėkite dar vieną elementą- atsitiktinį
+        // skaičių nuo 1 iki 33. Vėl patikrinkite pradinę sąlygą ir jeigu reikia pridėkite
+        // dar vieną elementą. Kartokite, kol sąlyga nereikalaus pridėti elemento.
+
+        int[] rndNumArray3 = rndNumArray(1, 33, 3);
+        for (int i = 0; i < rndNumArray3.length; i++) {
+            System.out.print(rndNumArray3[i] + " ");
+        }
+        System.out.println();
+        rndNumArrayCheck(rndNumArray3);
+
+        System.out.println("\n\n-------------------------- TASK 18 --------------------------\n");
+
 
     }
 
@@ -305,10 +336,46 @@ public class Main {
         }
     }
 
+    // 16. -----------------------------------------------------------------------------------------------
 
+    public static int primeNumbersCount (int[] rndNumArray) {
+        int primeNumbersCount = 0;
+        for (int i = 0; i < rndNumArray.length; i++) {
+            if (factorsCount(rndNumArray[i]) == 0) {
+                primeNumbersCount++;
+            }
+        }
 
+        return primeNumbersCount;
+    }
 
+    // 17. -----------------------------------------------------------------------------------------------
 
+    public static void rndNumArrayCheck (int[] rndNumArray) {
+        boolean containsNonPrime = true;
+        while (containsNonPrime) {
+            containsNonPrime = false;
+
+            for (int i = rndNumArray.length - 1; i >= rndNumArray.length - 3 && i >= 0; i--) {
+                if (factorsCount(rndNumArray[i]) > 0) {
+                    containsNonPrime = true;
+                    break;
+                }
+            }
+            if (containsNonPrime) {
+                int[] newRndNumArray = new int[rndNumArray.length + 1];
+
+                for (int i = 0; i < rndNumArray.length; i++) {
+                    newRndNumArray[i] = rndNumArray[i];
+                }
+                newRndNumArray[newRndNumArray.length - 1] = 1 + (int) Math.round(Math.random() * (33 - 1));
+                rndNumArray = newRndNumArray;
+            }
+            System.out.println(Arrays.toString(rndNumArray));
+        }
+    }
+
+    // 18. -----------------------------------------------------------------------------------------------
 
 
 
