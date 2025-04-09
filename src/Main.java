@@ -170,6 +170,14 @@ public class Main {
 
         System.out.println("\n\n-------------------------- TASK 18 --------------------------\n");
 
+        // 18. Sugeneruokite masyvą iš 10 elementų, kurie yra masyvai iš 10 elementų,
+        // kurie yra atsitiktiniai skaičiai nuo 1 iki 100. Jeigu tokio didelio masyvo (ne
+        // atskirai mažesnių) pirminių skaičių vidurkis mažesnis už 70, suraskite
+        // masyve mažiausią skaičių (nebūtinai pirminį) ir prie jo pridėkite 3. Vėl
+        // paskaičiuokite masyvo pirminių skaičių vidurkį ir jeigu mažesnis nei 70
+        // viską kartokite.
+
+        twoDimensionalArray(3,3, 1, 100);
 
     }
 
@@ -377,50 +385,88 @@ public class Main {
 
     // 18. -----------------------------------------------------------------------------------------------
 
+    public static void twoDimensionalArray (int numOfRows, int numOfColumns, int min, int max) {
+        int[][] twoDimArray = new int[numOfRows][numOfColumns];
+        for (int i = 0; i < numOfRows; i++) {
+            for (int j = 0; j < numOfColumns; j++) {
+                twoDimArray[i][j] = min + (int) Math.round(Math.random() * (max - min));
+            }
+        }
 
+        while (true) {
+            int primeSum = 0;
+            int primeCount = 0;
 
+            for (int i = 0; i < numOfRows; i++) {
+                for (int j = 0; j < numOfColumns; j++) {
+                    int num = twoDimArray[i][j];
+                    if (num >= 2) {
+                        boolean isPrime = true;
+                        for (int k = 2; k <= Math.sqrt(num); k++) {
+                            if (num % k == 0) {
+                                isPrime = false;
+                                break;
+                            }
+                        }
+                        if (isPrime) {
+                            primeSum += num;
+                            primeCount++;
+                        }
+                    }
+                }
+            }
 
+            if (primeCount == 0) {
+                break;
+            }
 
+            double primeAverage = (double) primeSum / primeCount;
 
+            if (primeAverage >= 70) {
+                break;
+            }
 
+            int minValue = twoDimArray[0][0];
+            int minRow = 0;
+            int minColumn = 0;
 
+            for (int i = 0; i < numOfRows; i++) {
+                for (int j = 0; j < numOfColumns; j++) {
+                    if (twoDimArray[i][j] < minValue) {
+                        minValue = twoDimArray[i][j];
+                        minRow = i;
+                        minColumn = j;
+                    }
+                }
+            }
 
+            twoDimArray[minRow][minColumn] += 3;
+        }
+        int finalPrimeSum = 0;
+        int finalPrimeCount = 0;
+        for (int i = 0; i < numOfRows; i++) {
+            for (int j = 0; j < numOfColumns; j++) {
+                int num = twoDimArray[i][j];
+                if (num >= 2) {
+                    boolean isPrime = true;
+                    for (int k = 2; k <= Math.sqrt(num); k++) {
+                        if (num % k == 0) {
+                            isPrime = false;
+                            break;
+                        }
+                    }
+                    if (isPrime) {
+                        finalPrimeSum += num;
+                        finalPrimeCount++;
+                    }
+                }
+            }
+        }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        System.out.println("Pirminių skaičių kiekis: " + finalPrimeCount);
+        System.out.println("Pirminių skaičių suma: " + finalPrimeSum);
+        System.out.println(Arrays.deepToString(twoDimArray));
+    }
 
 
 
